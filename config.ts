@@ -10,7 +10,7 @@ export const config: Config = {
   // Relative path to the canvas repository
   pathToRepository: '../commit-art-canvas',
   // This date MUST be a Sunday (because github show it this way) and must be this format YYYY-MM-DD at 12:00 UTC
-  patternStartDate: new Date('2023-09-17T12:00:00.000Z'),
+  patternStartDate: new Date('2023-09-22T12:00:00.000Z'),
   // The pattern you want to draw
   // Some examples:
   // patternToDraw: 'I ♥ DevTools',
