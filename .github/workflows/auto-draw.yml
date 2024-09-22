@@ -1,0 +1,30 @@
+name: Daily
+
+on:
+  schedule:
+    - cron: '0 12 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        node-version: [20.x]
+    steps:
+    - name: Setup SSH
+      uses: webfactory/ssh-agent@v0.7.0
+      with:
+        ssh-private-key: ${{ secrets.DEPLOY_KEY_PRIVATE }}
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - run: git config --global user.name "${{ secrets.GIT_CONFIG_NAME }}"
+    - run: git config --global user.username "${{ secrets.GIT_CONFIG_USERNAME }}"
+    - run: git config --global user.email "${{ secrets.GIT_CONFIG_EMAIL }}"
+    - run: cd .. && git clone ${{ secrets.GIT_SSH_CANVAS }} commit-art-canvas
+    - run: npm run check
