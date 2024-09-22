@@ -1,0 +1,21 @@
+{
+  "extends": "@sindresorhus/tsconfig",
+	"compilerOptions": {
+		"outDir": "dist",
+		"target": "es2020",
+		"lib": [
+			"es2020"
+		],
+		"noPropertyAccessFromIndexSignature": false,
+		"isolatedModules": true
+	},
+	"include": [
+		"src",
+		"types"
+	],
+	"ts-node": {
+		"transpileOnly": true,
+		"files": true,
+		"experimentalResolver": true
+	}
+}

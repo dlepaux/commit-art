@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  node-app:
+    image: node:20
+    container_name: node-app
+    working_dir: /usr/src/app
+    volumes:
+      - ./:/usr/src/app
+    privileged: true
+    # Disable time synchronisation and permits to change the date programatically
+    cap_add:
+      - SYS_TIME
+    # Keep the container running
+    command: tail -f /dev/null
+    environment:
+      NODE_ENV: development
+
+volumes:
+  node_modules:
